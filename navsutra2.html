@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NavSutra - Circular Textile Ecosystem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #1F6B45;
+            --secondary: #FFD700;
+            --accent: #FF6B6B;
+            --light: #F8F9FA;
+            --dark: #343A40;
+            --gray: #6C757D;
+            --light-gray: #E9ECEF;
+            --success: #28A745;
+            --warning: #FFC107;
+            --info: #17A2B8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1558769132-cb25c5d11e85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn-hero {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* How It Works */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .step-icon {
+            background: var(--primary);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Marketplace */
+        .marketplace-filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .filter-select {
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            background: white;
+            min-width: 150px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .product-artisan {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .artisan-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .artisan-name {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .product-price {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Donation Form */
+        .donation-form {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Impact Dashboard */
+        .impact-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .impact-map {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        
+        .map-placeholder {
+            height: 300px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        
+        .impact-timeline {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: -30px;
+            width: 2px;
+            background: var(--light-gray);
+        }
+        
+        .timeline-item:last-child:before {
+            display: none;
+        }
+        
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            flex: 1;
+        }
+        
+        .timeline-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255,255,255,0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+        }
+        
+        .dashboard-header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .user-details h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .user-role {
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .dashboard-nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .dashboard-nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+        
+        .dashboard-sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--dark);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .dashboard-main {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .dashboard-section {
+            display: none;
+        }
+        
+        .dashboard-section.active {
+            display: block;
+        }
+        
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card-dash {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-value-dash {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label-dash {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        th {
+            background: var(--light);
+            font-weight: 600;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background: #FFF3CD;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background: #D1ECF1;
+            color: #0C5460;
+        }
+        
+        .status-approved {
+            background: #D4EDDA;
+            color: #155724;
+        }
+        
+        .status-processing {
+            background: #E2E3E5;
+            color: #383D41;
+        }
+        
+        /* Role-specific forms */
+        .role-form {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .marketplace-filters {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                min-width: 100%;
+            }
+            
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-nav {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Public Website -->
+    <div id="publicWebsite">
+        <!-- Header -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <i class="fas fa-recycle" style="color: #2E8B57; font-size: 28px;"></i>
+                    <h1>NavSutra</h1>
+                </div>
+                <nav class="nav-links">
+                    <a href="#" class="active">Home</a>
+                    <a href="#marketplace">Marketplace</a>
+                    <a href="#donate">Donate</a>
+                    <a href="#impact">Impact</a>
+                    <a href="#about">About</a>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Login</button>
+                    <button class="btn btn-primary" id="registerBtn">Register</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h2>Transforming Textile Waste into Sustainable Livelihoods</h2>
+                <p>NavSutra connects donors, NGOs, artisans, and recyclers in a circular textile ecosystem that reduces waste and empowers communities.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-hero" id="donateNowBtn">Donate Now</button>
+                    <button class="btn btn-outline btn-hero" style="color: white; border-color: white;" id="exploreMarketplaceBtn">Explore Marketplace</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>How NavSutra Works</h2>
+                    <p>Our circular textile ecosystem connects all stakeholders in a sustainable flow</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>Donate Textiles</h3>
+                        <p>Individuals and businesses donate unused textiles through our platform</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-sort"></i>
+                        </div>
+                        <h3>Sort & Categorize</h3>
+                        <p>NGO partners sort donations by type, quality, and potential reuse</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>Smart Matching</h3>
+                        <p>Our platform matches materials with artisan needs or recycling partners</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Create & Sell</h3>
+                        <p>Artisans transform materials into beautiful products sold on our marketplace</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketplace -->
+        <section id="marketplace" style="background-color: var(--light);">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Artisan Marketplace</h2>
+                    <p>Discover unique upcycled products created by skilled Indian artisans</p>
+                </div>
+                <div class="marketplace-filters">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search products...">
+                    </div>
+                    <div class="filter-options">
+                        <select class="filter-select" id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="Home Decor">Home Decor</option>
+                            <option value="Bags & Purses">Bags & Purses</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Clothing">Clothing</option>
+                        </select>
+                        <select class="filter-select" id="sortFilter">
+                            <option value="featured">Sort by: Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Section -->
+        <section id="donate">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Donate Your Textiles</h2>
+                    <p>Give your unused textiles a new life and support artisan communities</p>
+                </div>
+                <form class="donation-form" id="donationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donorName">Full Name</label>
+                            <input type="text" id="donorName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donorEmail">Email</label>
+                            <input type="email" id="donorEmail" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donorPhone">Phone</label>
+                            <input type="tel" id="donorPhone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donorAddress">Address</label>
+                            <input type="text" id="donorAddress" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textileType">Textile Type</label>
+                        <select id="textileType" class="form-control" required>
+                            <option value="">Select textile type</option>
+                            <option value="cotton">Cotton Clothing</option>
+                            <option value="wool">Woolen Items</option>
+                            <option value="silk">Silk Fabric</option>
+                            <option value="mixed">Mixed Fabrics</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="textileQuantity">Approximate Quantity (kg)</label>
+                        <input type="number" id="textileQuantity" class="form-control" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="donationNotes">Additional Notes</label>
+                        <textarea id="donationNotes" class="form-control" placeholder="Any specific details about your donation..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">Schedule Pickup</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Impact Dashboard -->
+        <section id="impact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Impact</h2>
+                    <p>Tracking the positive change we create together</p>
+                </div>
+                <div class="impact-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">12,458</div>
+                        <div class="stat-label">Kg of Textiles Saved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">3,742</div>
+                        <div class="stat-label">Artisans Supported</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">28,915</div>
+                        <div class="stat-label">Products Created</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">245</div>
+                        <div class="stat-label">NGO Partners</div>
+                    </div>
+                </div>
+                <div class="impact-map">
+                    <h3 style="margin-bottom: 20px;">Impact Across India</h3>
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-right: 15px;"></i>
+                        <span>Interactive Impact Map</span>
+                    </div>
+                </div>
+                <div class="impact-timeline">
+                    <h3 style="margin-bottom: 20px;">Recent Impact Stories</h3>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">June 15, 2023</div>
+                            <h4>Rajasthan Artisan Collective</h4>
+                            <p>50 kg of donated cotton transformed into 200 beautiful quilts by artisans in Jaipur</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">May 28, 2023</div>
+                            <h4>Kolkata Upcycling Workshop</h4>
+                            <p>35 kg of silk scraps upcycled into designer bags by women's cooperative</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">April 10, 2023</div>
+                            <h4>Delhi Recycling Initiative</h4>
+                            <p>120 kg of non-usable textiles diverted from landfills to recycling units</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>NavSutra</h3>
+                        <p>Creating a circular textile ecosystem that reduces waste and empowers communities across India.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#marketplace">Marketplace</a></li>
+                            <li><a href="#donate">Donate Textiles</a></li>
+                            <li><a href="#impact">Our Impact</a></li>
+                            <li><a href="#">Become a Partner</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">How It Works</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Artisan Stories</a></li>
+                            <li><a href="#">Sustainability Report</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Contact Us</h3>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Mumbai, India</li>
+                            <li><i class="fas fa-phone" style="margin-right: 10px;"></i> +91 98765 43210</li>
+                            <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@navsutra.org</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2023 NavSutra. All rights reserved. | Crafted with ❤️ for a sustainable India</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Dashboard (Hidden by default) -->
+    <div id="dashboard" class="dashboard">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="container dashboard-container">
+                <div class="user-info">
+                    <img src="" alt="User" class="user-avatar" id="userAvatar">
+                    <div class="user-details">
+                        <h2 id="userName">User Name</h2>
+                        <span class="user-role" id="userRole">Role</span>
+                    </div>
+                </div>
+                <nav class="dashboard-nav">
+                    <a href="#" class="active" data-section="overview">Overview</a>
+                    <a href="#" data-section="donations">Donations</a>
+                    <a href="#" data-section="products">Products</a>
+                    <a href="#" data-section="orders">Orders</a>
+                    <a href="#" data-section="impact">Impact</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="container dashboard-content">
+            <!-- Sidebar -->
+            <div class="dashboard-sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" data-section="overview"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" data-section="donations"><i class="fas fa-hand-holding-heart"></i> My Donations</a></li>
+                    <li><a href="#" data-section="products"><i class="fas fa-tshirt"></i> Products</a></li>
+                    <li><a href="#" data-section="orders"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                    <li><a href="#" data-section="impact"><i class="fas fa-chart-line"></i> Impact</a></li>
+                    <li><a href="#" data-section="profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="#" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="dashboard-main">
+                <!-- Overview Section -->
+                <div class="dashboard-section active" id="overview-section">
+                    <h2>Dashboard Overview</h2>
+                    <div class="stats-cards" id="roleStats">
+                        <!-- Stats will be dynamically loaded based on user role -->
+                    </div>
+                    <div id="roleSpecificContent">
+                        <!-- Content will be dynamically loaded based on user role -->
+                    </div>
+                </div>
+
+                <!-- Donations Section -->
+                <div class="dashboard-section" id="donations-section">
+                    <h2>My Donations</h2>
+                    <div id="donorDonationForm" class="role-form" style="display: none;">
+                        <h3>Schedule New Donation</h3>
+                        <form id="dashboardDonationForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dashTextileType">Textile Type</label>
+                                    <select id="dashTextileType" class="form-control" required>
+                                        <option value="">Select textile type</option>
+                                        <option value="cotton">Cotton Clothing</option>
+                                        <option value="wool">Woolen Items</option>
+                                        <option value="silk">Silk Fabric</option>
+                                        <option value="mixed">Mixed Fabrics</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dashTextileQuantity">Quantity (kg)</label>
+                                    <input type="number" id="dashTextileQuantity" class="form-control" min="1" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dashDonationNotes">Additional Notes</label>
+                                <textarea id="dashDonationNotes" class="form-control" placeholder="Any specific details about your donation..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Schedule Pickup</button>
+                        </form>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="donationsTable">
+                                <!-- Donations will be dynamically loaded -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div class="dashboard-section" id="products-section">
+                    <h2>Products</h2>
+                    <div id="artisanProductForm" class="role-form" style="display: none;">
+                        <h3>Add New Product</h3>
+                        <form id="newProductForm">
+                            <div class="form-group">
+                                <label for="productName">Product Name</label>
+                                <input type="text" id="productName" class="form-control" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="productCategory">Category</label>
+                                    <select id="productCategory" class="form-control" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Home Decor">Home Decor</option>
+                                        <option value="Bags & Purses">Bags & Purses</option>
+                                        <option value="Accessories">Accessories</option>
+                                        <option value="Clothing">Clothing</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="productPrice">Price (₹)</label>
+                                    <input type="number" id="productPrice" class="form-control" min="1" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="productDescription">Description</label>
+                                <textarea id="productDescription" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </form>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTable">
+                                <!-- Products will be dynamically loaded -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div class="dashboard-section" id="orders-section">
+                    <h2>Orders</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTable">
+                                <!-- Orders will be dynamically loaded -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Impact Section -->
+                <div class="dashboard-section" id="impact-section">
+                    <h2>My Impact</h2>
+                    <div class="stats-cards">
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash" id="impactTextiles">0</div>
+                            <div class="stat-label-dash">Kg Textiles Saved</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash" id="impactProducts">0</div>
+                            <div class="stat-label-dash">Products Created</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash" id="impactCO2">0</div>
+                            <div class="stat-label-dash">CO2 Reduced (kg)</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash" id="impactLives">0</div>
+                            <div class="stat-label-dash">Lives Impacted</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div class="dashboard-section" id="profile-section">
+                    <h2>My Profile</h2>
+                    <div class="role-form">
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="profileName">Full Name</label>
+                                <input type="text" id="profileName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email</label>
+                                <input type="email" id="profileEmail" class="form-control" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhone">Phone</label>
+                                <input type="tel" id="profilePhone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileAddress">Address</label>
+                                <textarea id="profileAddress" class="form-control"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeLoginModal">&times;</button>
+            <h2 class="modal-title">Login to NavSutra</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 15px;">Login</button>
+                <div style="text-align: center;">
+                    <a href="#" style="color: var(--primary);">Forgot your password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeRegisterModal">&times;</button>
+            <h2 class="modal-title">Join NavSutra</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerRole">I want to join as:</label>
+                    <select id="registerRole" class="form-control" required>
+                        <option value="">Select your role</option>
+                        <option value="donor">Donor</option>
+                        <option value="artisan">Artisan</option>
+                        <option value="ngo">NGO Partner</option>
+                        <option value="recycler">Recycling Company</option>
+                        <option value="logistics">Logistics Partner</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ===============================
+        // MOCK DATABASE USING LOCALSTORAGE
+        // ===============================
+
+        // Initialize database if not exists
+        function initializeDatabase() {
+            if (!localStorage.getItem('navsutra_db')) {
+                const db = {
+                    users: [
+                        { 
+                            id: 1, 
+                            email: "donor@example.com", 
+                            password: "password", 
+                            name: "Rajesh Kumar", 
+                            role: "donor", 
+                            avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+                            phone: "+91 98765 43210",
+                            address: "Mumbai, Maharashtra"
+                        },
+                        { 
+                            id: 2, 
+                            email: "artisan@example.com", 
+                            password: "password", 
+                            name: "Priya Sharma", 
+                            role: "artisan", 
+                            avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+                            phone: "+91 98765 43211",
+                            address: "Jaipur, Rajasthan"
+                        },
+                        { 
+                            id: 3, 
+                            email: "ngo@example.com", 
+                            password: "password", 
+                            name: "Green Earth NGO", 
+                            role: "ngo", 
+                            avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+                            phone: "+91 98765 43212",
+                            address: "Delhi, India"
+                        },
+                        { 
+                            id: 4, 
+                            email: "recycler@example.com", 
+                            password: "password", 
+                            name: "EcoRecycle Co.", 
+                            role: "recycler", 
+                            avatar: "https://randomuser.me/api/portraits/men/67.jpg",
+                            phone: "+91 98765 43213",
+                            address: "Bangalore, Karnataka"
+                        },
+                        { 
+                            id: 5, 
+                            email: "logistics@example.com", 
+                            password: "password", 
+                            name: "QuickDel Logistics", 
+                            role: "logistics", 
+                            avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+                            phone: "+91 98765 43214",
+                            address: "Hyderabad, Telangana"
+                        }
+                    ],
+                    products: [
+                        {
+                            id: 1,
+                            artisanId: 2,
+                            name: "Handcrafted Patchwork Quilt",
+                            description: "Beautiful quilt made from upcycled cotton fabrics with traditional Indian patterns",
+                            category: "Home Decor",
+                            price: 2499,
+                            images: ["https://images.unsplash.com/photo-1581784368655-0fe6529b6e4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"],
+                            materialsUsed: ["Cotton", "Silk scraps"],
+                            status: "active",
+                            stock: 5,
+                            createdAt: "2023-07-15"
+                        },
+                        {
+                            id: 2,
+                            artisanId: 2,
+                            name: "Upcycled Denim Tote Bag",
+                            description: "Stylish and durable tote bag made from recycled denim",
+                            category: "Bags & Purses",
+                            price: 899,
+                            images: ["https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"],
+                            materialsUsed: ["Denim", "Cotton lining"],
+                            status: "active",
+                            stock: 12,
+                            createdAt: "2023-08-01"
+                        },
+                        {
+                            id: 3,
+                            artisanId: 2,
+                            name: "Sari Fabric Journal Cover",
+                            description: "Elegant journal cover made from repurposed silk sari fabric",
+                            category: "Accessories",
+                            price: 450,
+                            images: ["https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"],
+                            materialsUsed: ["Silk", "Paper"],
+                            status: "active",
+                            stock: 8,
+                            createdAt: "2023-08-10"
+                        }
+                    ],
+                    donations: [
+                        {
+                            id: 1,
+                            donorId: 1,
+                            type: "cotton",
+                            quantity: 5,
+                            description: "Old cotton clothes in good condition",
+                            status: "completed",
+                            createdAt: "2023-07-20",
+                            scheduledPickup: "2023-07-22",
+                            ngoId: 3
+                        },
+                        {
+                            id: 2,
+                            donorId: 1,
+                            type: "mixed",
+                            quantity: 8,
+                            description: "Mixed fabric scraps from tailoring unit",
+                            status: "processing",
+                            createdAt: "2023-08-15",
+                            scheduledPickup: "2023-08-18"
+                        }
+                    ],
+                    orders: [
+                        {
+                            id: 1,
+                            customerId: 1,
+                            productId: 1,
+                            quantity: 1,
+                            totalAmount: 2499,
+                            status: "delivered",
+                            createdAt: "2023-07-25"
+                        },
+                        {
+                            id: 2,
+                            customerId: 1,
+                            productId: 2,
+                            quantity: 2,
+                            totalAmount: 1798,
+                            status: "shipped",
+                            createdAt: "2023-08-05"
+                        }
+                    ],
+                    impact: {
+                        totalTextilesSaved: 12458,
+                        totalArtisansSupported: 3742,
+                        totalProductsCreated: 28915,
+                        totalNgoPartners: 245
+                    }
+                };
+                localStorage.setItem('navsutra_db', JSON.stringify(db));
+            }
+            return JSON.parse(localStorage.getItem('navsutra_db'));
+        }
+
+        // Database operations
+        function getDB() {
+            return JSON.parse(localStorage.getItem('navsutra_db'));
+        }
+
+        function updateDB(db) {
+            localStorage.setItem('navsutra_db', JSON.stringify(db));
+        }
+
+        function addUser(user) {
+            const db = getDB();
+            user.id = db.users.length > 0 ? Math.max(...db.users.map(u => u.id)) + 1 : 1;
+            db.users.push(user);
+            updateDB(db);
+            return user;
+        }
+
+        function addProduct(product) {
+            const db = getDB();
+            product.id = db.products.length > 0 ? Math.max(...db.products.map(p => p.id)) + 1 : 1;
+            product.createdAt = new Date().toISOString().split('T')[0];
+            db.products.push(product);
+            updateDB(db);
+            return product;
+        }
+
+        function addDonation(donation) {
+            const db = getDB();
+            donation.id = db.donations.length > 0 ? Math.max(...db.donations.map(d => d.id)) + 1 : 1;
+            donation.createdAt = new Date().toISOString().split('T')[0];
+            donation.status = "scheduled";
+            db.donations.push(donation);
+            updateDB(db);
+            return donation;
+        }
+
+        // ===============================
+        // APPLICATION LOGIC
+        // ===============================
+
+        let currentUser = null;
+        const db = initializeDatabase();
+
+        // DOM Elements
+        const publicWebsite = document.getElementById('publicWebsite');
+        const dashboard = document.getElementById('dashboard');
+        const productsGrid = document.getElementById('productsGrid');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const closeRegisterModal = document.getElementById('closeRegisterModal');
+        const donateNowBtn = document.getElementById('donateNowBtn');
+        const exploreMarketplaceBtn = document.getElementById('exploreMarketplaceBtn');
+        const donationForm = document.getElementById('donationForm');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userName = document.getElementById('userName');
+        const userRole = document.getElementById('userRole');
+        const userAvatar = document.getElementById('userAvatar');
+        const roleStats = document.getElementById('roleStats');
+        const roleSpecificContent = document.getElementById('roleSpecificContent');
+        const donationsTable = document.getElementById('donationsTable');
+        const productsTable = document.getElementById('productsTable');
+        const ordersTable = document.getElementById('ordersTable');
+        const impactTextiles = document.getElementById('impactTextiles');
+        const impactProducts = document.getElementById('impactProducts');
+        const impactCO2 = document.getElementById('impactCO2');
+        const impactLives = document.getElementById('impactLives');
+        const dashboardDonationForm = document.getElementById('dashboardDonationForm');
+        const newProductForm = document.getElementById('newProductForm');
+        const profileForm = document.getElementById('profileForm');
+
+        // Load products for marketplace
+        function loadProducts() {
+            productsGrid.innerHTML = '';
+            const products = db.products.filter(p => p.status === 'active');
+            
+            products.forEach(product => {
+                const artisan = db.users.find(u => u.id === product.artisanId);
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.images[0]}" alt="${product.name}" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-artisan">
+                            <img src="${artisan.avatar}" alt="${artisan.name}" class="artisan-avatar">
+                            <span class="artisan-name">${artisan.name}</span>
+                        </div>
+                        <div class="product-price">₹${product.price}</div>
+                        <div class="product-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Modal Functions
+        function openModal(modal) {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(modal) {
+            modal.style.display = 'none';
+        }
+
+        // Login function
+        function login(email, password) {
+            const user = db.users.find(u => u.email === email && u.password === password);
+            if (user) {
+                currentUser = user;
+                publicWebsite.style.display = 'none';
+                dashboard.style.display = 'block';
+                userName.textContent = user.name;
+                userRole.textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+                userAvatar.src = user.avatar;
+                loadDashboardForRole(user.role);
+                return true;
+            }
+            return false;
+        }
+
+        // Register function
+        function register(name, email, password, role) {
+            // Check if user already exists
+            if (db.users.find(u => u.email === email)) {
+                return false;
+            }
+            
+            // Create new user
+            const gender = role === 'artisan' || role === 'ngo' ? 'women' : 'men';
+            const avatarId = Math.floor(Math.random() * 70) + 1;
+            
+            const newUser = {
+                email,
+                password,
+                name,
+                role,
+                avatar: `https://randomuser.me/api/portraits/${gender}/${avatarId}.jpg`,
+                phone: "",
+                address: ""
+            };
+            
+            addUser(newUser);
+            return true;
+        }
+
+        // Load dashboard based on user role
+        function loadDashboardForRole(role) {
+            // Show/hide role-specific forms
+            document.getElementById('donorDonationForm').style.display = role === 'donor' ? 'block' : 'none';
+            document.getElementById('artisanProductForm').style.display = role === 'artisan' ? 'block' : 'none';
+
+            // Load stats based on role
+            let statsHTML = '';
+            let contentHTML = '';
+            
+            const userDonations = db.donations.filter(d => d.donorId === currentUser.id);
+            const userProducts = db.products.filter(p => p.artisanId === currentUser.id);
+            const userOrders = db.orders.filter(o => o.customerId === currentUser.id);
+            
+            switch(role) {
+                case 'donor':
+                    statsHTML = `
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${userDonations.length}</div>
+                            <div class="stat-label-dash">Donations Made</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${userDonations.reduce((sum, d) => sum + d.quantity, 0)}</div>
+                            <div class="stat-label-dash">Kg Donated</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${userDonations.filter(d => d.status === 'completed').length}</div>
+                            <div class="stat-label-dash">Completed</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${userDonations.filter(d => d.status === 'processing').length}</div>
+                            <div class="stat-label-dash">In Progress</div>
+                        </div>
+                    `;
+                    contentHTML = `
+                        <h3>Recent Donations</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Quantity</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${userDonations.map(donation => `
+                                        <tr>
+                                            <td>D${donation.id.toString().padStart(3, '0')}</td>
+                                            <td>${donation.createdAt}</td>
+                                            <td>${donation.type}</td>
+                                            <td>${donation.quantity} kg</td>
+                                            <td><span class="status-badge status-${donation.status}">${donation.status}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'artisan':
+                    statsHTML = `
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${userProducts.length}</div>
+                            <div class="stat-label-dash">Products Listed</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${userOrders.length}</div>
+                            <div class="stat-label-dash">Orders Received</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">₹${userOrders.reduce((sum, o) => sum + o.totalAmount, 0)}</div>
+                            <div class="stat-label-dash">Total Earnings</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${userProducts.reduce((sum, p) => sum + p.stock, 0)}</div>
+                            <div class="stat-label-dash">Items in Stock</div>
+                        </div>
+                    `;
+                    contentHTML = `
+                        <h3>Recent Orders</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Product</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${userOrders.map(order => {
+                                        const product = db.products.find(p => p.id === order.productId);
+                                        return `
+                                            <tr>
+                                                <td>O${order.id.toString().padStart(3, '0')}</td>
+                                                <td>${order.createdAt}</td>
+                                                <td>${product.name}</td>
+                                                <td>₹${order.totalAmount}</td>
+                                                <td><span class="status-badge status-${order.status}">${order.status}</span></td>
+                                            </tr>
+                                        `;
+                                    }).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'ngo':
+                    const ngoDonations = db.donations.filter(d => d.ngoId === currentUser.id);
+                    statsHTML = `
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${ngoDonations.length}</div>
+                            <div class="stat-label-dash">Donations Processed</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${ngoDonations.reduce((sum, d) => sum + d.quantity, 0)}</div>
+                            <div class="stat-label-dash">Kg Textiles Handled</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${Math.floor(ngoDonations.reduce((sum, d) => sum + d.quantity, 0) * 0.7)}</div>
+                            <div class="stat-label-dash">Lives Impacted</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${Math.floor(ngoDonations.reduce((sum, d) => sum + d.quantity, 0) * 2.5)}</div>
+                            <div class="stat-label-dash">CO2 Saved (kg)</div>
+                        </div>
+                    `;
+                    contentHTML = `
+                        <h3>Recent Donations</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Quantity</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${ngoDonations.map(donation => `
+                                        <tr>
+                                            <td>D${donation.id.toString().padStart(3, '0')}</td>
+                                            <td>${donation.createdAt}</td>
+                                            <td>${donation.type}</td>
+                                            <td>${donation.quantity} kg</td>
+                                            <td><span class="status-badge status-${donation.status}">${donation.status}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'recycler':
+                    const recyclerMaterials = db.donations.filter(d => d.status === 'recycled');
+                    statsHTML = `
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${recyclerMaterials.length}</div>
+                            <div class="stat-label-dash">Batches Processed</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${recyclerMaterials.reduce((sum, d) => sum + d.quantity, 0)}</div>
+                            <div class="stat-label-dash">Kg Recycled</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">${Math.floor(recyclerMaterials.reduce((sum, d) => sum + d.quantity, 0) * 2)}</div>
+                            <div class="stat-label-dash">CO2 Saved (kg)</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">12</div>
+                            <div class="stat-label-dash">Jobs Created</div>
+                        </div>
+                    `;
+                    contentHTML = `
+                        <h3>Recent Materials</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Quantity</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${recyclerMaterials.map(material => `
+                                        <tr>
+                                            <td>D${material.id.toString().padStart(3, '0')}</td>
+                                            <td>${material.createdAt}</td>
+                                            <td>${material.type}</td>
+                                            <td>${material.quantity} kg</td>
+                                            <td><span class="status-badge status-${material.status}">${material.status}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'logistics':
+                    statsHTML = `
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">24</div>
+                            <div class="stat-label-dash">Deliveries This Month</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">156</div>
+                            <div class="stat-label-dash">Kg Transported</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">98%</div>
+                            <div class="stat-label-dash">On-time Rate</div>
+                        </div>
+                        <div class="stat-card-dash">
+                            <div class="stat-value-dash">12</div>
+                            <div class="stat-label-dash">Active Partners</div>
+                        </div>
+                    `;
+                    contentHTML = `
+                        <h3>Recent Deliveries</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>From → To</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>DL001</td>
+                                        <td>2023-08-15</td>
+                                        <td>Donation Pickup</td>
+                                        <td>Mumbai → Delhi</td>
+                                        <td><span class="status-badge status-completed">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>DL002</td>
+                                        <td>2023-08-18</td>
+                                        <td>Product Delivery</td>
+                                        <td>Jaipur → Bangalore</td>
+                                        <td><span class="status-badge status-processing">In Transit</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            roleStats.innerHTML = statsHTML;
+            roleSpecificContent.innerHTML = contentHTML;
+            
+            // Load impact data
+            impactTextiles.textContent = userDonations.reduce((sum, d) => sum + d.quantity, 0);
+            impactProducts.textContent = userProducts.length;
+            impactCO2.textContent = Math.floor(userDonations.reduce((sum, d) => sum + d.quantity, 0) * 2.5);
+            impactLives.textContent = Math.floor(userDonations.reduce((sum, d) => sum + d.quantity, 0) * 0.7);
+            
+            // Load tables
+            loadDonationsTable(role);
+            loadProductsTable(role);
+            loadOrdersTable(role);
+            loadProfileData();
+        }
+
+        // Load donations table based on role
+        function loadDonationsTable(role) {
+            let data = [];
+            if (role === 'donor') {
+                data = db.donations.filter(d => d.donorId === currentUser.id);
+            } else if (role === 'ngo') {
+                data = db.donations.filter(d => d.ngoId === currentUser.id);
+            } else if (role === 'recycler') {
+                data = db.donations.filter(d => d.status === 'recycled');
+            }
+            
+            donationsTable.innerHTML = data.map(donation => `
+                <tr>
+                    <td>D${donation.id.toString().padStart(3, '0')}</td>
+                    <td>${donation.createdAt}</td>
+                    <td>${donation.type}</td>
+                    <td>${donation.quantity} kg</td>
+                    <td><span class="status-badge status-${donation.status}">${donation.status}</span></td>
+                    <td>
+                        <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">View</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load products table based on role
+        function loadProductsTable(role) {
+            let data = [];
+            if (role === 'artisan') {
+                data = db.products.filter(p => p.artisanId === currentUser.id);
+            }
+            
+            productsTable.innerHTML = data.map(product => `
+                <tr>
+                    <td>${product.name}</td>
+                    <td>${product.category}</td>
+                    <td>₹${product.price}</td>
+                    <td><span class="status-badge status-${product.status}">${product.status}</span></td>
+                    <td>
+                        <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">Edit</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load orders table based on role
+        function loadOrdersTable(role) {
+            let data = [];
+            if (role === 'artisan') {
+                data = db.orders.filter(o => {
+                    const product = db.products.find(p => p.id === o.productId);
+                    return product && product.artisanId === currentUser.id;
+                });
+            } else if (role === 'donor') {
+                data = db.orders.filter(o => o.customerId === currentUser.id);
+            }
+            
+            ordersTable.innerHTML = data.map(order => {
+                const product = db.products.find(p => p.id === order.productId);
+                return `
+                    <tr>
+                        <td>O${order.id.toString().padStart(3, '0')}</td>
+                        <td>${order.createdAt}</td>
+                        <td>${product ? product.name : 'Unknown Product'}</td>
+                        <td>₹${order.totalAmount}</td>
+                        <td><span class="status-badge status-${order.status}">${order.status}</span></td>
+                        <td>
+                            <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">View</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Load profile data
+        function loadProfileData() {
+            if (currentUser) {
+                document.getElementById('profileName').value = currentUser.name;
+                document.getElementById('profileEmail').value = currentUser.email;
+                document.getElementById('profilePhone').value = currentUser.phone || '';
+                document.getElementById('profileAddress').value = currentUser.address || '';
+            }
+        }
+
+        // Dashboard navigation
+        function setupDashboardNavigation() {
+            // Top nav
+            const topNavLinks = document.querySelectorAll('.dashboard-nav a[data-section]');
+            topNavLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = link.getAttribute('data-section');
+                    
+                    // Update active state
+                    topNavLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Show section
+                    showDashboardSection(section);
+                });
+            });
+            
+            // Sidebar nav
+            const sidebarLinks = document.querySelectorAll('.sidebar-menu a[data-section]');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = link.getAttribute('data-section');
+                    
+                    // Update active state
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Update top nav active state
+                    topNavLinks.forEach(l => {
+                        if (l.getAttribute('data-section') === section) {
+                            l.classList.add('active');
+                        } else {
+                            l.classList.remove('active');
+                        }
+                    });
+                    
+                    // Show section
+                    showDashboardSection(section);
+                });
+            });
+        }
+
+        // Show dashboard section
+        function showDashboardSection(section) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.dashboard-section');
+            sections.forEach(s => s.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(`${section}-section`).classList.add('active');
+        }
+
+        // Event Listeners
+        loginBtn.addEventListener('click', () => openModal(loginModal));
+        registerBtn.addEventListener('click', () => openModal(registerModal));
+        closeLoginModal.addEventListener('click', () => closeModal(loginModal));
+        closeRegisterModal.addEventListener('click', () => closeModal(registerModal));
+        donateNowBtn.addEventListener('click', () => {
+            document.getElementById('donate').scrollIntoView({ behavior: 'smooth' });
+        });
+        exploreMarketplaceBtn.addEventListener('click', () => {
+            document.getElementById('marketplace').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) closeModal(loginModal);
+            if (e.target === registerModal) closeModal(registerModal);
+        });
+
+        // Form Submissions
+        donationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your donation! We will contact you shortly to schedule pickup.');
+            donationForm.reset();
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (login(email, password)) {
+                closeModal(loginModal);
+                loginForm.reset();
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        });
+
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const role = document.getElementById('registerRole').value;
+            
+            if (register(name, email, password, role)) {
+                alert('Registration successful! You can now login with your credentials.');
+                closeModal(registerModal);
+                registerForm.reset();
+            } else {
+                alert('A user with this email already exists. Please use a different email.');
+            }
+        });
+
+        // Dashboard donation form
+        dashboardDonationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const type = document.getElementById('dashTextileType').value;
+            const quantity = document.getElementById('dashTextileQuantity').value;
+            const notes = document.getElementById('dashDonationNotes').value;
+            
+            const donation = {
+                donorId: currentUser.id,
+                type: type,
+                quantity: parseFloat(quantity),
+                description: notes,
+                status: "scheduled"
+            };
+            
+            addDonation(donation);
+            alert('Donation scheduled successfully!');
+            dashboardDonationForm.reset();
+            loadDashboardForRole(currentUser.role);
+        });
+
+        // New product form
+        newProductForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const price = document.getElementById('productPrice').value;
+            const description = document.getElementById('productDescription').value;
+            
+            const product = {
+                artisanId: currentUser.id,
+                name: name,
+                description: description,
+                category: category,
+                price: parseFloat(price),
+                images: ["https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"],
+                materialsUsed: ["Upcycled fabrics"],
+                status: "active",
+                stock: 1
+            };
+            
+            addProduct(product);
+            alert('Product added successfully!');
+            newProductForm.reset();
+            loadDashboardForRole(currentUser.role);
+        });
+
+        // Profile form
+        profileForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const db = getDB();
+            const userIndex = db.users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1) {
+                db.users[userIndex].name = document.getElementById('profileName').value;
+                db.users[userIndex].phone = document.getElementById('profilePhone').value;
+                db.users[userIndex].address = document.getElementById('profileAddress').value;
+                
+                updateDB(db);
+                currentUser = db.users[userIndex];
+                userName.textContent = currentUser.name;
+                alert('Profile updated successfully!');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentUser = null;
+            dashboard.style.display = 'none';
+            publicWebsite.style.display = 'block';
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            setupDashboardNavigation();
+        });
+    </script>
+</body>
+</html>
