@@ -58,16 +58,17 @@
         }
         
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            color: var(--primary);
-            font-weight: 700;
-        }
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    width: 120px;       
+    height: 120px;
+    object-fit: contain;
+}
+
         
         .nav-links {
             display: flex;
@@ -1412,9 +1413,9 @@
         <header>
             <div class="container header-container">
                 <div class="logo">
-                    <i class="fas fa-recycle" style="color: #2E8B57; font-size: 28px;"></i>
-                    <h1>NavSutra</h1>
-                </div>
+    <img src="assets/logo.png" alt="NavSutra Logo" class="logo-img">
+</div>
+
                 <nav class="nav-links">
                     <a href="#" class="active">Home</a>
                     <a href="#about">About</a>
